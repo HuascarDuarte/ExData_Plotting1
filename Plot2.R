@@ -1,7 +1,9 @@
+## Plot 2
+
 ## Reading full data file as data.frame, since fread() does not treat na.strings
 ## correctly
 Dt<-read.csv("../household_power_consumption.txt", sep=";", 
-                   na.strings="?", stringsAsFactors=F)
+             na.strings="?", stringsAsFactors=F)
 
 ## Subsetting data to days 2007-02-01 and 2007-02-02
 Dt<-subset(Dt, Date == "1/2/2007" | Date == "2/2/2007")
@@ -11,12 +13,18 @@ Dt<-subset(Dt, Date == "1/2/2007" | Date == "2/2/2007")
 Dt<-cbind(Dt, Datetime=strptime(paste(Dt$Date, Dt$Time), "%d/%m/%Y %H:%M:%S"))
 
 ## Open png graphic device
-png(file="plot1.png")
+png(file="plot2.png")
 
-## Create the Histogram with proper title and labels
-hist(Dt$Global_active_power, col="red", 
-     main="Global Active Power", xlab="Global Active Power (kilowatts)", 
-     ylab="Frequency")
+## Create the plot with proper title and labels, without data
+with(Dt, plot(Datetime, Global_active_power, 
+              type="n",
+              main="", 
+              ylab="Global Active Power (kilowatts)",
+              xlab=""
+              )
+    )
+## Create the line
+with(Dt, lines(Datetime, Global_active_power))
 
 ## Close graphic device
 dev.off()
