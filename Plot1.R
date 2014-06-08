@@ -1,3 +1,5 @@
+## Plot 1
+
 ## Reading full data file as data.frame, since fread() does not treat na.strings
 ## correctly
 Dt<-read.csv("../household_power_consumption.txt", sep=";", 
